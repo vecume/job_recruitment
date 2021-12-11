@@ -1,13 +1,15 @@
 import React, { createContext, useReducer } from 'react';
 
+import { ipcRenderer } from 'electron';
+
 export enum AuthActions {
   SIGN_IN,
   SING_OUT,
 }
 
 export interface IAuthState {
-  user?: any | null;
-  token?: string | '' | null;
+  ok: boolean;
+  role: "employee" | "employer" | null | undefined;
 }
 
 export interface IAction {
@@ -16,29 +18,24 @@ export interface IAction {
 }
 
 const INITIAL_STATE: IAuthState = {
-  user: JSON.parse(localStorage.getItem('user') || '{}'),
-  token: localStorage.getItem('token') || '',
+  ok: false,
+  role: null
 };
 
 function reducer(state: IAuthState, action: IAction): IAuthState {
   switch (action.type) {
     case AuthActions.SIGN_IN:
-      localStorage.setItem('token', action.payload?.token || '');
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      action.payload?.user
-        && localStorage.setItem(
-          'user',
-          JSON.stringify(action.payload?.user) || ''
-        );
       return {
-        ...state,
-        ...action.payload,
+        ok: !!action.payload?.ok,
+        role: action.payload?.role
       };
     case AuthActions.SING_OUT:
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      ipcRenderer.sendSync("send", {
+        method: "logout"
+      });
       return {
-        ...INITIAL_STATE,
+        ok: false,
+        role: null
       };
     default:
       return state;

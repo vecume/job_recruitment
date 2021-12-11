@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import 'antd/dist/antd.css';
+import { GlobalProvider } from './context/GlobalContext';
 import reportWebVitals from './reportWebVitals';
 
 render(
   <BrowserRouter>
     <AuthProvider>
-      <App />
+      <GlobalProvider>
+        <App />
+      </GlobalProvider>
     </AuthProvider>
   </BrowserRouter>,
   document.getElementById('root')

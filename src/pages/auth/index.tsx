@@ -10,7 +10,7 @@ import SignUp from './SignUp';
 export default function Auth() {
   const { authState } = useContext(AuthContext);
 
-  if (authState.token) return <Navigate to="/" />;
+  if (authState.ok) return <Navigate to="/" />;
 
   return (
     <Tabs

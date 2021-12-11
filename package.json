@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
@@ -129,24 +130,5 @@
       ]
     }
   },
-  "homepage": "./",
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "prettier --write",
-      "eslint src/ --ext .js,.jsx,.ts,.tsx --fix"
-    ],
-    "main/**/*.{ts,tsx}": [
-      "prettier --write",
-      "eslint main/ --ext .ts,.tsx --fix"
-    ],
-    "src/**/*.{css,scss}": [
-      "prettier --write",
-      "stylelint \"src/**/*.scss\" --fix"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  }
+  "homepage": "./"
 }

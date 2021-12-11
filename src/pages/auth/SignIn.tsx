@@ -1,11 +1,8 @@
 /* eslint-disable import-helpers/order-imports */
-import { AuthActions, AuthContext } from '@/context/AuthContext';
 import { Button, Form, Input } from 'antd';
-import { useContext } from 'react';
+import { ipcRenderer } from 'electron';
 
 export default function SignIn() {
-  const { authDispatch } = useContext(AuthContext);
-
   function handleFinish({
     email,
     password,
@@ -13,12 +10,10 @@ export default function SignIn() {
     email: string;
     password: string;
   }) {
-    authDispatch({
-      type: AuthActions.SIGN_IN,
-      payload: {
-        user: {},
-        token: `${email}${password}`,
-      },
+    ipcRenderer.send('send', {
+      method: 'login',
+      email,
+      password,
     });
   }
 

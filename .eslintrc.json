@@ -20,6 +20,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "linebreak-style": "off",
     "react/jsx-no-bind": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
