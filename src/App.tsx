@@ -1,28 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { remote } from 'electron';
+import { Route, Routes } from 'react-router-dom';
 
-import logo from './logo.svg';
+import Header from './components/Header';
+import Auth from './pages/auth';
+import Home from './pages/home';
+
 import './App.scss';
 
+// eslint-disable-next-line arrow-body-style
 const App: React.FC = () => {
-  const handleClose = (e: any): void => {
-    e.preventDefault();
-    remote.getCurrentWindow().close();
-  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img alt="logo" className="App-logo" src={logo} />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="#" onClick={handleClose}
-role="button">
-          Click this link to close the window.
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <Routes>
+        <Route element={<Home />} path="/" />
+        <Route element={<Auth />} path="/auth" />
+      </Routes>
     </div>
   );
 };

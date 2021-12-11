@@ -49,11 +49,11 @@ function onReady() {
   console.log(`${app.getVersion()}`); // eslint-disable-line
   mainWindow = new BrowserWindow(mainWindowConfig);
   const fileName = isDev
-    ? 'http://localhost:3000/index.html'
+    ? 'http://localhost:3000'
     : `file://${__dirname}/index.html`;
-  if (isDev) {
+  if(isDev) {
     mainWindow.webContents.openDevTools({
-      mode: 'undocked',
+      mode: "right",
     });
   }
   mainWindow.loadURL(fileName);
