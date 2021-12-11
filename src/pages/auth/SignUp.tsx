@@ -4,11 +4,15 @@ import { ipcRenderer } from 'electron';
 
 export default function SignUp() {
   function handleFinish(values: any) {
-    ipcRenderer.send("send", {
+    ipcRenderer.sendSync("send", {
       method: "register",
       email: values.email,
       password: values.password,
       role: values.role
+    });
+
+    ipcRenderer.send("send", {
+      method: "is_logged_in"
     });
   }
 
